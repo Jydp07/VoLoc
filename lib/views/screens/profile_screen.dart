@@ -30,6 +30,8 @@ class _ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Your Profile'),
         centerTitle: true,
+        backgroundColor: Colors.orangeAccent,
+
       ),
       body: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {

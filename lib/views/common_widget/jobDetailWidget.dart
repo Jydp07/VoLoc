@@ -31,10 +31,14 @@ class JobDetailWidget extends StatelessWidget {
                 // Product image
                 Hero(
                   tag: image,
-                  child: FadeInImage(placeholder: NetworkImage(
-                    '$image',
-                  ), image: NetworkImage('$image'),height: MediaQuery.of(context).size.height / 2,
-                    fit: BoxFit.fill,),
+                  child: FadeInImage(
+                    placeholder: NetworkImage(
+                      '$image',
+                    ),
+                    image: NetworkImage('$image'),
+                    height: MediaQuery.of(context).size.height / 2,
+                    fit: BoxFit.contain,
+                  ),
                 ),
 
                 // Product title
@@ -47,21 +51,20 @@ class JobDetailWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
                 ),
-
+                // Product price
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    '₹$price',
+                    style: const TextStyle(
+                        fontSize: 18.0, fontWeight: FontWeight.w500),
+                  ),
+                ),
                 // Product description
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text('$details')),
 
-                // Product price
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    '$price',
-                    style: const TextStyle(
-                        fontSize: 18.0, fontWeight: FontWeight.w500),
-                  ),
-                ),
                 const SizedBox(
                   height: 30.0,
                 ),
@@ -73,14 +76,22 @@ class JobDetailWidget extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.orangeAccent
-              ),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.orangeAccent),
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ServiceBookScreen(title: title,image: image,details: details,price: price,)));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => ServiceBookScreen(
+                            title: title,
+                            image: image,
+                            details: details,
+                            price: price,
+                          )));
                 },
-                child: const Text('BOOK NOW',style: TextStyle(color: Colors.black87),),
+                child: const Text(
+                  'BOOK NOW',
+                  style: TextStyle(color: Colors.black87),
+                ),
               ),
             ),
           ),

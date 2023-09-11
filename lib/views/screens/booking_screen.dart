@@ -12,7 +12,7 @@ class BookingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Booked Service"),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.orangeAccent,
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance

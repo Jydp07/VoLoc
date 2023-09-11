@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Voloc"),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.orangeAccent,
         centerTitle: true,
       ),
       body: ListView(
