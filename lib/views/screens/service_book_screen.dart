@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -86,7 +87,7 @@ class _ServiceBookScreenState extends State<ServiceBookScreen> {
       showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return CupertinoAlertDialog(
               content: const Text("Your service is booked"),
               actions: [
                 TextButton(

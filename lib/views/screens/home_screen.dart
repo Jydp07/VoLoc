@@ -1,3 +1,4 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Voloc"),
-        backgroundColor: Colors.orangeAccent,
+        title: const Text("ServeEasy"),
+        backgroundColor: Colors.orange,
         centerTitle: true,
       ),
       body: ListView(
@@ -89,7 +90,7 @@ class HomeScreen extends StatelessWidget {
             builder: (BuildContext context,
                 AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator(); // Show loading indicator while data is loading
+                return const Center(child: CircularProgressIndicator()); // Show loading indicator while data is loading
               }
 
               if (snapshot.hasError) {
