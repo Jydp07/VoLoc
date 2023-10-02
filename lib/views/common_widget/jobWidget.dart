@@ -76,7 +76,7 @@ class JobWidget extends StatelessWidget {
                   child: Card(
                     child: Container(
                       alignment: Alignment.center,
-                      height: 55,
+                      height: 50,
                       width: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),

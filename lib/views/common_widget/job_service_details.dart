@@ -260,7 +260,21 @@ class JobServiceDetailWidget extends StatelessWidget {
                                   .doc(user!.uid)
                                   .collection("user_bookings")
                                   .doc(deleteData)
-                                  .delete();
+                                  .update(
+                                {
+                                  "booking status" : "cancel"
+                                }
+                              );
+                              await FirebaseFirestore.instance
+                                  .collection("bookings")
+                                  .doc('OyyVyUTow1dKiARbGjliFRGTuMt2')
+                                  .collection("user_bookings")
+                                  .doc(deleteData)
+                                  .update(
+                                  {
+                                    "booking status" : "cancel"
+                                  }
+                              );
                               // ignore: use_build_context_synchronously
                               showDialog(
                                   context: context,

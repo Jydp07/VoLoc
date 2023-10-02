@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 class ServiceBookScreen extends StatefulWidget {
   const ServiceBookScreen(
       {super.key, this.title, this.price, this.image, this.details});
+
   final title;
   final price;
   final image;
@@ -28,18 +29,27 @@ class _ServiceBookScreenState extends State<ServiceBookScreen> {
 
   var isLoading = false;
   final format = DateFormat('yyyy-MM-dd - kk:mm');
+
+  Future<String> generateUniqueID() async {
+    // Generate a unique ID using Firebase
+    final result = await FirebaseFirestore.instance.collection('dummy').add({});
+    final uniqueID = result.id;
+    return uniqueID;
+  }
+
   _book(context) async {
     if (_bookKey.currentState!.validate()) {
       setState(() {
         isLoading = true;
       });
       final dt = format.format(DateTime.now());
+      final uniqueID = await generateUniqueID();
       final user = FirebaseAuth.instance.currentUser;
       await FirebaseFirestore.instance
           .collection('bookings')
           .doc(user!.uid)
           .collection("user_bookings")
-          .doc()
+          .doc(uniqueID)
           .set({
         "name": _nameController.text,
         "image": widget.image,
@@ -48,13 +58,15 @@ class _ServiceBookScreenState extends State<ServiceBookScreen> {
         "details": widget.details,
         "mobile": _mobController.text,
         "address": _addressController.text,
-        "date_time": dt
+        "date_time": dt,
+        "booking status": "confirm",
+        "userId" : user.uid,
       });
       await FirebaseFirestore.instance
           .collection('bookings')
           .doc('OyyVyUTow1dKiARbGjliFRGTuMt2')
           .collection("user_bookings")
-          .doc()
+          .doc(uniqueID)
           .set({
         "name": _nameController.text,
         "image": widget.image,
@@ -63,9 +75,11 @@ class _ServiceBookScreenState extends State<ServiceBookScreen> {
         "details": widget.details,
         "mobile": _mobController.text,
         "address": _addressController.text,
-        "date_time": dt
+        "date_time": dt,
+        "booking status": "confirm",
+        "userId" : user.uid,
       });
-      
+
       setState(() {
         isLoading = false;
       });

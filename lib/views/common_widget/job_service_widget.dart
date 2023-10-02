@@ -13,7 +13,7 @@ class JobServiceWidget extends StatelessWidget {
       this.name,
       this.number,
       this.address,
-      this.date, this.deleteData});
+      this.date, required this.deleteData});
 
   final price;
   final details;
