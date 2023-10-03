@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../common_widget/job_service_widget.dart';
+import 'package:voloc/views/common_widget/booking_statusWise.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -44,6 +44,19 @@ class _BookingScreenState extends State<BookingScreen> {
             .collection("user_bookings")
             .where('booking status', isEqualTo: "cancel")
             .snapshots();
+      case "completed":
+        return FirebaseFirestore.instance
+            .collection('bookings')
+            .doc(user!.uid)
+            .collection("user_bookings")
+            .where('booking status', isEqualTo: "complete")
+            .snapshots();
+      default:
+        return FirebaseFirestore.instance
+            .collection('bookings')
+            .doc(user!.uid)
+            .collection("user_bookings")
+            .snapshots();
     }
   }
 
@@ -57,7 +70,7 @@ class _BookingScreenState extends State<BookingScreen> {
       body: ListView(
         children: [
           Align(
-            alignment: Alignment.topLeft,
+            alignment: Alignment.topRight,
             child: DropdownButton<String>(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               value: dropdownValue,
@@ -65,6 +78,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 DropdownMenuItem(value: 'all', child: Text("all")),
                 DropdownMenuItem(value: 'confirmed', child: Text("confirmed")),
                 DropdownMenuItem(value: 'cancelled', child: Text("cancelled")),
+                DropdownMenuItem(value: 'completed', child: Text("completed")),
               ],
               onChanged: (value) {
                 setState(() {
@@ -102,7 +116,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 5),
-                        child: JobServiceWidget(
+                        child: StatusBookingWidget(
                           title: records['title'],
                           details: records['details'],
                           image: records['image'],
@@ -112,6 +126,7 @@ class _BookingScreenState extends State<BookingScreen> {
                           address: records['address'],
                           date: records['date_time'],
                           deleteData: recordData[index].id,
+                          bookingStatus: records['booking status'],
                         ),
                       );
                     },

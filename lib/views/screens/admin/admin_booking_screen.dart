@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../common_widget/job_service_widget.dart';
+import 'package:voloc/views/common_widget/booking_statusWise.dart';
 
 class AdminBookingScreen extends StatefulWidget {
   const AdminBookingScreen({super.key});
@@ -49,6 +49,12 @@ class _AdminBookingScreenState extends State<AdminBookingScreen> {
             .collection("user_bookings")
             .where('booking status', isEqualTo: "complete")
             .snapshots();
+      default:
+        return FirebaseFirestore.instance
+            .collection('bookings')
+            .doc('OyyVyUTow1dKiARbGjliFRGTuMt2')
+            .collection("user_bookings")
+            .snapshots();
     }
   }
 
@@ -86,6 +92,7 @@ class _AdminBookingScreenState extends State<AdminBookingScreen> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,13 +143,13 @@ class _AdminBookingScreenState extends State<AdminBookingScreen> {
                       // Check if image URL is available before creating the widget
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 5),
+                            vertical: 10, horizontal: 15),
                         child: GestureDetector(
                           onLongPress: () {
                             return onLongPress(
                                 recordData[index].id, records['userId']);
                           },
-                          child: JobServiceWidget(
+                          child: StatusBookingWidget(
                             title: records['title'],
                             details: records['details'],
                             image: records['image'],
@@ -152,6 +159,7 @@ class _AdminBookingScreenState extends State<AdminBookingScreen> {
                             address: records['address'],
                             date: records['date_time'],
                             deleteData: recordData[index].id,
+                            bookingStatus: records['booking status'],
                           ),
                         ),
                       );
