@@ -69,7 +69,7 @@ class _AdminBookingScreenState extends State<AdminBookingScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
-                title: const Text('order completed'),
+                title: const Text('set order as completed'),
                 onTap: () async {
                   Navigator.pop(context);
                   await FirebaseFirestore.instance
